@@ -137,5 +137,8 @@ function collectStar(player, star) {
     //let soundSample = this.sound.add('gemAudio');
     //soundSample.play();
     score += 10;
+    if (score == 120) {
+        scoreText.setText("WINNERRR");
+    }
     scoreText.setText('Score: ' + score);
 }
