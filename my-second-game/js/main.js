@@ -39,8 +39,8 @@ function preload() {
 function create() {
     this.add.image(400, 300, 'sky');
 
-/*    gemAudio = this.sound.add("gemAudio", { loop: false });
-*/   /* this.physics.add.collider(this.dude, this.star, function (dude, star) {
+    gemSound = this.sound.add("gemAudio");
+    /*this.physics.add.collider(this.dude, this.star, function (dude, star) {
         gemAudio.play();
     });*/
 
@@ -95,6 +95,10 @@ function create() {
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
+    this.physics.add.collider(player, stars, function (player, star) {
+        gemSound.play();
+
+    });
 
     this.physics.add.overlap(player, stars, collectStar, null, this);
 }
