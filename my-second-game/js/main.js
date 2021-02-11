@@ -22,6 +22,7 @@ var stars;
 var platforms;
 var cursors;
 var score = 0;
+var music;
 var scoreText;
 
 var game = new Phaser.Game(config);
@@ -118,8 +119,10 @@ function update() {
 
 function collectStar(player, star) {
     star.disableBody(true, true);
-    let soundSample = this.sound.add('gemAudio');
-    soundSample.play();
+    music = this.add.audio('gemAudio');
+    music.play();
+    //let soundSample = this.sound.add('gemAudio');
+    //soundSample.play();
     score += 10;
     scoreText.setText('Score: ' + score);
 }
