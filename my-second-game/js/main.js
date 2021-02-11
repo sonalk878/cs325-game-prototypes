@@ -41,9 +41,9 @@ function preload() {
 function create() {
     this.add.image(400, 300, 'sky');
 
-  /*  music = this.add.audio('gemAudio');
+    music = this.add.audio('gemAudio');
 
-    music.play();*/
+    music.play();
     /*this.physics.add.collider(this.dude, this.star, function (dude, star) {
         gemAudio.play();
     });*/
