@@ -32,7 +32,7 @@ function preload() {
     this.load.image('ground', './assets/platform.png');
     this.load.image('star', './assets/star.png');
     this.load.image('bomb', './assets/bomb.png');
-    this.load.spritesheet('dude', './assets/wolf.png', { frameWidth: 32, frameHeight: 48 });
+    this.load.spritesheet('dude', './assets/woof.png', { frameWidth: 32, frameHeight: 48 });
     this.load.audio('gemAudio', './assets/audio/gem.mp3');
 }
 
