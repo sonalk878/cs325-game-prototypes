@@ -28,7 +28,7 @@ var scoreText;
 var game = new Phaser.Game(config);
 
 function preload() {
-    this.load.image('sky', './assets/sky.png');
+    this.load.image('sky', './assets/sky3.png');
     this.load.image('ground', './assets/platform.png');
     this.load.image('star', './assets/star.png');
     this.load.image('bomb', './assets/bomb.png');
@@ -41,9 +41,9 @@ function preload() {
 function create() {
     this.add.image(400, 300, 'sky');
 
-    music = this.add.audio('gemAudio');
+  /*  music = this.add.audio('gemAudio');
 
-    music.play();
+    music.play();*/
     /*this.physics.add.collider(this.dude, this.star, function (dude, star) {
         gemAudio.play();
     });*/
