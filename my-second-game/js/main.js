@@ -99,10 +99,10 @@ function create() {
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
-    this.physics.add.collider(player, stars, function (player, star) {
+    /*this.physics.add.collider(player, stars, function (player, star) {
         gemSound.play();
 
-    });
+    });*/
 
     this.physics.add.overlap(player, stars, collectStar, null, this);
 }
