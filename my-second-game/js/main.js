@@ -119,8 +119,8 @@ function update() {
 
 function collectStar(player, star) {
     star.disableBody(true, true);
-    music = this.add.audio('gemAudio');
-    music.play();
+/*    music = this.add.audio('gemAudio');
+    music.play();*/
 
     //let soundSample = this.sound.add('gemAudio');
     //soundSample.play();
