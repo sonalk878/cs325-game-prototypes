@@ -32,10 +32,13 @@ function preload() {
     this.load.image('star', './assets/star.png');
     this.load.image('bomb', './assets/bomb.png');
     this.load.spritesheet('dude', './assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+    this.load.audio('gemAudio', './assets/audio/gem.mp3');
 }
 
 function create() {
     this.add.image(400, 300, 'sky');
+    let soundSample = this.sound.add('gemAudio');
+    soundSample.play();
 
     platforms = this.physics.add.staticGroup();
 
