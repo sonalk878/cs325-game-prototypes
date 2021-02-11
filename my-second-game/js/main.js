@@ -33,7 +33,7 @@ function preload() {
     this.load.image('star', './assets/star.png');
     this.load.image('bomb', './assets/bomb.png');
     this.load.spritesheet('dude', './assets/ally2.png', { frameWidth: 32, frameHeight: 48 });
-    this.load.audio('gemAudio', ['./assets/gem.mp3', './assets/gem.ogg']);
+    this.load.audio('gemAudio', ['./assets/game.mp3']);
 
 /*    this.load.audio('gemAudio', ['./assets/gem.mp3']);
 */}
@@ -41,7 +41,9 @@ function preload() {
 function create() {
     this.add.image(400, 300, 'sky');
 
-   
+    music = this.sound.add('gemAudio', { volume: 0.70 });
+    music.loop = true;
+    music.play();
     /*this.physics.add.collider(this.dude, this.star, function (dude, star) {
         gemAudio.play();
     });*/
@@ -97,11 +99,10 @@ function create() {
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
-    this.physics.add.collider(player, stars, function (player, star) {
-        music = this.sound.add('gemAudio', { volume: 0.69 });
-        music.loop = true;
-        music.play();
-    });
+    /*this.physics.add.collider(player, stars, function (player, star) {
+        gemSound.play();
+
+    });*/
 
     this.physics.add.overlap(player, stars, collectStar, null, this);
 }
