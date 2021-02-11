@@ -39,8 +39,7 @@ function preload() {
 function create() {
     this.add.image(400, 300, 'sky');
     
-    /*music = this.add.audio('gemAudio');
-    music.play();*/
+
     platforms = this.physics.add.staticGroup();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
@@ -120,8 +119,9 @@ function update() {
 
 function collectStar(player, star) {
     star.disableBody(true, true);
-    
-  //  music.stop();
+    music = this.add.audio('gemAudio');
+    music.play();
+
     //let soundSample = this.sound.add('gemAudio');
     //soundSample.play();
     score += 10;
