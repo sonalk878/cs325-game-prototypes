@@ -37,8 +37,7 @@ function preload() {
 
 function create() {
     this.add.image(400, 300, 'sky');
-    let soundSample = this.sound.add('gemAudio');
-    soundSample.play();
+    
 
     platforms = this.physics.add.staticGroup();
 
@@ -119,7 +118,8 @@ function update() {
 
 function collectStar(player, star) {
     star.disableBody(true, true);
-
+    let soundSample = this.sound.add('gemAudio');
+    soundSample.play();
     score += 10;
     scoreText.setText('Score: ' + score);
 }
