@@ -39,8 +39,8 @@ function preload() {
 function create() {
     this.add.image(400, 300, 'sky');
 
-    gemAudio = this.sound.add("gemAudio", { loop: false });
-   /* this.physics.add.collider(this.dude, this.star, function (dude, star) {
+/*    gemAudio = this.sound.add("gemAudio", { loop: false });
+*/   /* this.physics.add.collider(this.dude, this.star, function (dude, star) {
         gemAudio.play();
     });*/
 
