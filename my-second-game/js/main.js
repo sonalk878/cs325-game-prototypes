@@ -33,12 +33,16 @@ function preload() {
     this.load.image('star', './assets/star.png');
     this.load.image('bomb', './assets/bomb.png');
     this.load.spritesheet('dude', './assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-    this.load.audio('gemAudio', './assets/audio/gem.mp3');
+    this.load.audio('gemAudio', ['./assets/gem.mp3']);
 }
 
 function create() {
     this.add.image(400, 300, 'sky');
-    
+
+    gemAudio = this.sound.add("gemAudio", { loop: false });
+    this.physics.add.collider(this.dude, this.star, function (dude, star) {
+        gemAudio.play();
+    });
 
     platforms = this.physics.add.staticGroup();
 
