@@ -28,7 +28,7 @@ var scoreText;
 var game = new Phaser.Game(config);
 
 function preload() {
-    this.game.stage.backgroundColor = '#71c5cf';
+    this.stage.backgroundColor = '#71c5cf';
     this.load.image('sky', './assets/sky3.png');
     this.load.image('ground', './assets/platform.png');
     this.load.image('star', './assets/bird.png');
