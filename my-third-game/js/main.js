@@ -30,9 +30,9 @@ var game = new Phaser.Game(config);
 function preload() {
     this.load.image('sky', './assets/sky3.png');
     this.load.image('ground', './assets/platform.png');
-    this.load.image('star', './assets/star.png');
+    this.load.image('star', './assets/bird.png');
     this.load.image('bomb', './assets/bomb.png');
-    this.load.spritesheet('dude', './assets/ally2.png', { frameWidth: 32, frameHeight: 48 });
+    this.load.spritesheet('dude', './assets/pipe.png', { frameWidth: 32, frameHeight: 48 });
     this.load.audio('gemAudio', ['./assets/game.mp3']);
 
 /*    this.load.audio('gemAudio', ['./assets/gem.mp3']);
