@@ -1,42 +1,42 @@
 import "./phaser.js";
-var game = new Phaser.Game(400, 490, Phaser.AUTO, 'game_div');
+var game = new Phaser.Game(config);
 
 // Creates a new 'main' state that will contain the game
 var main_state = {
 
     preload: function () {
-        this.game.stage.backgroundColor = '#71c5cf';
+        this.stage.backgroundColor = '#71c5cf';
 
-        this.game.load.image('bird', './assets/bird.png');
-        this.game.load.image('pipe', './assets/pipe.png');
+        this.load.image('bird', './assets/bird.png');
+        this.load.image('pipe', './assets/pipe.png');
     },
 
-/*    create: function () {
+    create: function () {
         // Looks like I don't need this bellow line
         // this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        this.bird = this.game.add.sprite(100, 245, 'bird');
-        this.game.physics.enable([this.bird], Phaser.Physics.ARCADE);
+        this.bird = this.add.sprite(100, 245, 'bird');
+        this.physics.enable([this.bird], Phaser.Physics.ARCADE);
         this.bird.body.gravity.y = 1000;
 
         this.pipes = game.add.group();
         this.pipes.createMultiple(20, 'pipe');
 
         this.pipes.forEach(function (pipe) {
-            this.game.physics.enable([pipe], Phaser.Physics.ARCADE);
+            this..physics.enable([pipe], Phaser.Physics.ARCADE);
         });
 
         // Call the 'jump' function when the spacekey is hit
-        var space_key = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        var space_key = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         space_key.onDown.add(this.jump, this);
 
         // Add pipes after 1500ms
-        this.timer = this.game.time.events.loop(1500, this.add_row_of_pipes, this);
+        this.timer = this.time.events.loop(1500, this.add_row_of_pipes, this);
 
         // Score
         this.score = 0;
         var style = { font: "30px Arial", fill: "#ffffff" };
-        this.label_score = this.game.add.text(20, 20, "0", style);
+        this.label_score = this.add.text(20, 20, "0", style);
     },
 
     update: function () {
@@ -52,7 +52,7 @@ var main_state = {
             }
         });
 
-        this.game.physics.arcade.overlap(
+        this.physics.arcade.overlap(
             this.bird,
             this.pipes,
             this.restart_game,
@@ -73,10 +73,10 @@ var main_state = {
 
     // Restart the game
     restart_game: function () {
-        this.game.time.events.remove(this.timer);
+        this.time.events.remove(this.timer);
 
         // Start the 'main' state, which restarts the game
-        this.game.state.start('main');
+        this.state.start('main');
     },
 
     add_one_pipe: function (x, y) {
@@ -110,4 +110,4 @@ var main_state = {
 
 // Add and start the 'main' state to start the game
 game.state.add('main', main_state);
-game.state.start('main');*/
+game.state.start('main');
