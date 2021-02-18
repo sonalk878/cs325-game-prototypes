@@ -47,7 +47,7 @@ function create() {
     this.physics.world.enable([this.bird], Phaser.Physics.ARCADE);//adds collison and other attributes to it
     this.bird.body.gravity.y = 1000;
 
-    this.pipes = game.add.group();
+    this.pipes = this.add.group();
     this.pipes.createMultiple(20, 'pipe');//creates multiple pipes (20)
 
     this.pipes.forEach(function (pipe) {
