@@ -28,6 +28,7 @@ var scoreText;
 var game = new Phaser.Game(config);
 
 function preload() {
+    this.game.stage.backgroundColor = '#71c5cf';
     this.load.image('sky', './assets/sky3.png');
     this.load.image('ground', './assets/platform.png');
     this.load.image('star', './assets/bird.png');
@@ -39,7 +40,7 @@ function preload() {
 */}
 
 function create() {
-    this.add.image(400, 300, 'sky');
+    //this.add.image(400, 300, 'sky');
 /*     
     music = this.sound.add('gemAudio', { volume: 0.70 });
     music.loop = true;
