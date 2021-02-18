@@ -40,7 +40,7 @@ function preload() {
 
 function create() {
     this.add.image(400, 300, 'sky');
-/*
+/*     
     music = this.sound.add('gemAudio', { volume: 0.70 });
     music.loop = true;
     music.play();
@@ -106,7 +106,7 @@ function create() {
 
     this.physics.add.overlap(player, stars, collectStar, null, this);*/
 }
-
+/*
 function update() {
     if (cursors.left.isDown) {
         player.setVelocityX(-160);
@@ -131,8 +131,8 @@ function update() {
 
 function collectStar(player, star) {
     star.disableBody(true, true);
-    /*    music = this.add.audio('gemAudio');
-        music.play();*/
+    *//*    music = this.add.audio('gemAudio');
+        music.play();*//*
 
     //let soundSample = this.sound.add('gemAudio');
     //soundSample.play();
@@ -142,3 +142,4 @@ function collectStar(player, star) {
     }
     scoreText.setText('Score: ' + score);
 }
+*/
