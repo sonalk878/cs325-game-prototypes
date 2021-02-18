@@ -104,8 +104,8 @@ function create() {
 
     });*//*
 
-    this.physics.add.overlap(player, stars, collectStar, null, this);
-}*/
+    this.physics.add.overlap(player, stars, collectStar, null, this);*/
+}
 
 function update() {
     if (cursors.left.isDown) {
