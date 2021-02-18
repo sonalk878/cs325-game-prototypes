@@ -54,7 +54,7 @@ function create() {
         var thisPipe = pipes[i];
         this.physics.world.enable([this.thisPipe], Phaser.Physics.ARCADE);//adds collison and other attributes to it
     }*/
-    [this.pipes].world.forEach(function (pipe) {
+    this.pipes.world.forEach(function (pipe) {
         this.physics.world.enable([this.pipe], Phaser.Physics.ARCADE);//adds collison and other attributes to it
     });
 /*     
