@@ -50,7 +50,7 @@ function create() {
     this.pipes = this.add.group();
     this.pipes.createMultiple(20, 'pipe');//creates multiple pipes (20)
 
-    this.pipes.forEach(function (pipe) {
+    [this.pipes].forEach(function (pipe) {
         this.physics.world.enable([pipe], Phaser.Physics.ARCADE);//adds collison and other attributes to it
     });
 /*     
