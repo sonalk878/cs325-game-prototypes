@@ -47,16 +47,16 @@ function create() {
     this.physics.world.enable([this.bird], Phaser.Physics.ARCADE);//adds collison and other attributes to it
     this.bird.body.gravity.y = 1000;
 
-    this.pipes = this.add.group();
+    this.pipes = this.add.physicsGroup();
     this.pipes.createMultiple(20, 'pipe');//creates multiple pipes (20)
 
-    for (var i = 0; i < pipes.length; i++) {
+  /*  for (var i = 0; i < this.pipes.length; i++) {
         var thisPipe = pipes[i];
         this.physics.world.enable([this.thisPipe], Phaser.Physics.ARCADE);//adds collison and other attributes to it
-    }
-   /* [this.pipes].forEach(function (pipe) {
+    }*/
+    [this.pipes].forEach(function (pipe) {
         this.physics.world.enable([this.pipe], Phaser.Physics.ARCADE);//adds collison and other attributes to it
-    });*/
+    });
 /*     
     music = this.sound.add('gemAudio', { volume: 0.70 });
     music.loop = true;
