@@ -51,7 +51,7 @@ function create() {
     this.pipes.createMultiple(20, 'pipe');//creates multiple pipes (20)
 
     [this.pipes].forEach(function (pipe) {
-        this.physics.world.enable([pipe], Phaser.Physics.ARCADE);//adds collison and other attributes to it
+        this.physics.world.enable([this.pipe], Phaser.Physics.ARCADE);//adds collison and other attributes to it
     });
 /*     
     music = this.sound.add('gemAudio', { volume: 0.70 });
