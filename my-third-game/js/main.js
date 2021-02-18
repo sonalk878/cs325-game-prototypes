@@ -11,7 +11,7 @@ var main_state = {
         this.game.load.image('pipe', './assets/pipe.png');
     },
 
-    create: function () {
+/*    create: function () {
         // Looks like I don't need this bellow line
         // this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -110,4 +110,4 @@ var main_state = {
 
 // Add and start the 'main' state to start the game
 game.state.add('main', main_state);
-game.state.start('main');
+game.state.start('main');*/
