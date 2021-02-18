@@ -1,113 +1,144 @@
 import "./phaser.js";
-var game = new Phaser.Game(config);
-
-// Creates a new 'main' state that will contain the game
-var main_state = {
-
-    preload: function () {
-        this.stage.backgroundColor = '#71c5cf';
-
-        this.load.image('bird', './assets/bird.png');
-        this.load.image('pipe', './assets/pipe.png');
-    },
-
-    create: function () {
-        // Looks like I don't need this bellow line
-        // this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
-        this.bird = this.add.sprite(100, 245, 'bird');
-        this.physics.enable([this.bird], Phaser.Physics.ARCADE);
-        this.bird.body.gravity.y = 1000;
-
-        this.pipes = game.add.group();
-        this.pipes.createMultiple(20, 'pipe');
-
-        this.pipes.forEach(function (pipe) {
-            this..physics.enable([pipe], Phaser.Physics.ARCADE);
-        });
-
-        // Call the 'jump' function when the spacekey is hit
-        var space_key = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        space_key.onDown.add(this.jump, this);
-
-        // Add pipes after 1500ms
-        this.timer = this.time.events.loop(1500, this.add_row_of_pipes, this);
-
-        // Score
-        this.score = 0;
-        var style = { font: "30px Arial", fill: "#ffffff" };
-        this.label_score = this.add.text(20, 20, "0", style);
-    },
-
-    update: function () {
-        // If the bird is out of the world (too high or too low), call the 'restart_game' function
-        if (this.bird.inWorld == false) {
-            this.restart_game();
+var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
         }
-
-        // Looks like I have to kill the pipe on my own when it is out of the canvas
-        this.pipes.forEach(function (pipe) {
-            if (pipe.alive && !pipe.inWorld) {
-                pipe.kill();
-            }
-        });
-
-        this.physics.arcade.overlap(
-            this.bird,
-            this.pipes,
-            this.restart_game,
-            null,
-            this
-        );
     },
-
-    render: function () {
-
-    },
-
-    // Make the bird jump
-    jump: function () {
-        // Add a vertical velocity to the bird
-        this.bird.body.velocity.y = -350;
-    },
-
-    // Restart the game
-    restart_game: function () {
-        this.time.events.remove(this.timer);
-
-        // Start the 'main' state, which restarts the game
-        this.state.start('main');
-    },
-
-    add_one_pipe: function (x, y) {
-        console.log(this.pipes.countDead());
-        // Get the first dead pipe of our group
-        var pipe = this.pipes.getFirstDead();
-
-        // Set the new position of the pipe
-        pipe.reset(x, y);
-
-        // Add velocity to the pipe to make it move left
-        pipe.body.velocity.x = -200;
-
-        // Kill the pipe when it's no longer visible
-        pipe.outOfBoundsKill = true;
-    },
-
-    add_row_of_pipes: function () {
-        var hole = Math.floor(Math.random() * 4) + 1;
-
-        for (var i = 0; i < 8; i++) {
-            if (i != hole && i != hole + 1 && i != hole + 2) {
-                this.add_one_pipe(400, i * 60 + 10);
-            }
-        }
-
-        this.score += 1;
-        this.label_score.setText(this.score);
-    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
 };
 
-// Add and start the 'main' state to start the game
-game.state.add('main', main_state);
-game.state.start('main');
+var player;
+var stars;
+var platforms;
+var cursors;
+var score = 0;
+var music;
+var scoreText;
+
+var game = new Phaser.Game(config);
+
+function preload() {
+    this.load.image('sky', './assets/sky3.png');
+    this.load.image('ground', './assets/platform.png');
+    this.load.image('star', './assets/star.png');
+    this.load.image('bomb', './assets/bomb.png');
+    this.load.spritesheet('dude', './assets/ally2.png', { frameWidth: 32, frameHeight: 48 });
+    this.load.audio('gemAudio', ['./assets/game.mp3']);
+
+/*    this.load.audio('gemAudio', ['./assets/gem.mp3']);
+*/}
+
+function create() {
+    this.add.image(400, 300, 'sky');
+
+    music = this.sound.add('gemAudio', { volume: 0.70 });
+    music.loop = true;
+    music.play();
+    /*this.physics.add.collider(this.dude, this.star, function (dude, star) {
+        gemAudio.play();
+    });*/
+
+    platforms = this.physics.add.staticGroup();
+
+    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+
+    platforms.create(600, 400, 'ground');
+    platforms.create(50, 250, 'ground');
+    platforms.create(750, 220, 'ground');
+
+    player = this.physics.add.sprite(100, 450, 'dude');
+
+    player.setBounce(0.2);
+    player.setCollideWorldBounds(true);
+
+    this.anims.create({
+        key: 'left',
+        frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
+    this.anims.create({
+        key: 'turn',
+        frames: [{ key: 'dude', frame: 4 }],
+        frameRate: 20
+    });
+
+    this.anims.create({
+        key: 'right',
+        frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
+    cursors = this.input.keyboard.createCursorKeys();
+
+    stars = this.physics.add.group({
+        key: 'star',
+        repeat: 11,
+        setXY: { x: 12, y: 0, stepX: 70 }
+    });
+
+    stars.children.iterate(function (child) {
+
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+
+    });
+
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+
+    this.physics.add.collider(player, platforms);
+    this.physics.add.collider(stars, platforms);
+    /*this.physics.add.collider(player, stars, function (player, star) {
+        gemSound.play();
+
+    });*/
+
+    this.physics.add.overlap(player, stars, collectStar, null, this);
+}
+
+function update() {
+    if (cursors.left.isDown) {
+        player.setVelocityX(-160);
+
+        player.anims.play('left', true);
+    }
+    else if (cursors.right.isDown) {
+        player.setVelocityX(160);
+
+        player.anims.play('right', true);
+    }
+    else {
+        player.setVelocityX(0);
+
+        player.anims.play('turn');
+    }
+
+    if (cursors.up.isDown && player.body.touching.down) {
+        player.setVelocityY(-330);
+    }
+}
+
+function collectStar(player, star) {
+    star.disableBody(true, true);
+    /*    music = this.add.audio('gemAudio');
+        music.play();*/
+
+    //let soundSample = this.sound.add('gemAudio');
+    //soundSample.play();
+    score += 10;
+    if (score === 120) {
+        scoreText.setText("WINNERRR");
+    }
+    scoreText.setText('Score: ' + score);
+}
