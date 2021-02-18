@@ -43,15 +43,15 @@ function preload() {
 
 function create() {
     this.add.image(400, 300, 'sky');
-    this.bird = this.game.add.sprite(100, 245, 'bird');
-    this.game.physics.enable([this.bird], Phaser.Physics.ARCADE);//adds collison and other attributes to it
+    this.bird = this.add.sprite(100, 245, 'bird');
+    this.physics.enable([this.bird], Phaser.Physics.ARCADE);//adds collison and other attributes to it
     this.bird.body.gravity.y = 1000;
 
     this.pipes = game.add.group();
     this.pipes.createMultiple(20, 'pipe');//creates multiple pipes (20)
 
     this.pipes.forEach(function (pipe) {
-        this.game.physics.enable([pipe], Phaser.Physics.ARCADE);//adds collison and other attributes to it
+        this.physics.enable([pipe], Phaser.Physics.ARCADE);//adds collison and other attributes to it
     });
 /*     
     music = this.sound.add('gemAudio', { volume: 0.70 });
