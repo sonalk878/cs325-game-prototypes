@@ -22,6 +22,7 @@ var game = new Phaser.Game(config);
 var gameStarted = false;
 var score = 0;
 var scoreText;
+var music;
 var gameWon = false;
 
 function preload() {
